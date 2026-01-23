@@ -3,499 +3,963 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-  <title>RANG & MALL | Global Holdings</title>
-  <meta name="description" content="Rang & Mall — Architecting the future of living, logistics, and technology." />
+  <title>RANG & MALL | Global Venture Holdings</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==">
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==">
   <meta name="theme-color" content="#020202" />
 
-  <!-- Fonts: Cinzel (Luxury) & Manrope (Modern) & Space Mono (Tech) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Manrope:wght@300;500;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Manrope:wght@200;500;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    /* --- LUXURY SYSTEM --- */
+    /* --- DESIGN SYSTEM --- */
     :root {
-      --bg: #020202;
-      --card-bg: rgba(20, 20, 20, 0.6);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover: rgba(255, 255, 255, 0.15);
-      
-      --text-main: #f2f2f2;
-      --text-muted: #888;
-      
-      --accent-gold: #d4af37;
-      --accent-nature: #059669;
-      --accent-tech: #3b82f6;
-      --accent-cyan: #06b6d4;
-      --accent-purple: #a855f7;
-      
-      --ease: cubic-bezier(0.23, 1, 0.32, 1);
+      --bg: #030303;
+      --card-bg: #090909;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --accent: #d4af37;
+
+      /* CHROMATIC PALETTE */
+      --grad-nature: linear-gradient(135deg, #10b981 0%, #064e3b 100%);
+      --grad-tech: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+      --grad-rental: linear-gradient(135deg, #fbbf24 0%, #78350f 100%);
+      --grad-stealth: linear-gradient(135deg, #a855f7 0%, #4c1d95 100%);
+      --grad-pulse: linear-gradient(135deg, #f43f5e 0%, #881337 100%);
+      --grad-hr: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    
+
     body {
-      margin: 0; background: var(--bg); color: var(--text-main);
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Manrope', sans-serif;
       overflow-x: hidden;
     }
 
-    /* Ambient Background Glow */
-    .ambient-light {
-      position: fixed; top: -20%; left: -20%; width: 140%; height: 140%;
-      background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 70%);
-      z-index: -2;
-    }
-    
-    /* Film Grain */
+    /* Cinematic Grain Overlay */
     .noise {
-      position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.07;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10000;
+      opacity: 0.04;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    .container {
-      max-width: 1280px; margin: 0 auto; padding: 60px 24px;
-      position: relative; z-index: 1;
+    /* --- HOME VIEW --- */
+    .view-main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      transition: transform 0.8s var(--ease), opacity 0.5s;
+    }
+    body.portal-active .view-main {
+      transform: scale(0.9) translateY(-100px);
+      opacity: 0;
+      pointer-events: none;
     }
 
-    /* --- HEADER --- */
-    .header { text-align: center; margin-bottom: 80px; position: relative; }
-    .header::after {
-      content: ''; position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
-      width: 1px; height: 60px; background: linear-gradient(to bottom, #333, transparent);
-    }
-
-    /* LOGO STYLES */
-    .logo-container {
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .logo-img {
-      height: 100px; /* Adjust size as needed */
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 0 20px rgba(255,255,255,0.05));
-    }
+    header { text-align: center; margin-bottom: 80px; }
+    .logo-wrap { display: flex; justify-content: center; margin-bottom: 30px; }
+    .logo-img { height: 110px; width: auto; filter: drop-shadow(0 0 30px rgba(255,255,255,0.1)); }
 
     h1 {
-      font-family: 'Cinzel', serif; font-size: clamp(32px, 5vw, 56px);
-      margin: 0; letter-spacing: 0.05em; color: white;
-      text-shadow: 0 0 30px rgba(255,255,255,0.1);
+      font-family: 'Cinzel', serif;
+      font-size: clamp(32px, 6vw, 64px);
+      margin: 0;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      background: linear-gradient(to bottom, #fff, #777);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .subtitle {
-      font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent-gold);
-      letter-spacing: 0.2em; text-transform: uppercase; margin-top: 16px;
-    }
-
-    /* --- GRID --- */
-    .grid {
-      display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px;
-    }
-
-    /* --- CARD COMPONENT --- */
-    .card {
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      padding: 32px; display: flex; flex-direction: column; justify-content: space-between;
-      transition: all 0.5s var(--ease); position: relative; overflow: hidden; cursor: pointer;
-      min-height: 280px;
-    }
-    .card:hover {
-      border-color: var(--card-hover); transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4); background: rgba(30, 30, 30, 0.7);
+    .tagline {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-top: 15px;
+      opacity: 0.8;
     }
 
-    /* Sizing */
+    /* --- THE GRID --- */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
     .col-4 { grid-column: span 4; }
     .col-8 { grid-column: span 8; }
-    
-    @media (max-width: 1024px) { .col-4 { grid-column: span 6; } }
-    @media (max-width: 768px) { .col-4, .col-8 { grid-column: span 12; } }
+    @media (max-width: 900px) { .col-4, .col-8 { grid-column: span 12; } }
 
-    /* Typography */
-    .eyebrow {
-      font-family: 'Space Mono'; font-size: 10px; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px;
-      display: flex; justify-content: space-between; align-items: center;
+    /* --- CARD UI --- */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 340px;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: 0.4s var(--ease);
+      outline: none;
     }
-    
-    h3 {
-      font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 24px;
-      margin: 0 0 12px 0; color: white; letter-spacing: -0.02em;
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.5s var(--ease);
+      pointer-events: none;
+      z-index: 1;
     }
-    
-    p {
-      font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: 0;
-      font-weight: 300; max-width: 90%;
+    .card:hover {
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-8px);
+      background: #111;
     }
-
-    .expand-hint {
-      margin-top: 24px; font-family: 'Space Mono'; font-size: 10px; text-transform: uppercase;
-      color: var(--accent-gold); opacity: 0; transition: 0.3s; transform: translateY(5px);
+    .card:hover::before {
+      opacity: 0.15;
     }
-    .card:hover .expand-hint { opacity: 1; transform: translateY(0); }
-
-    /* Tags */
-    .asset-tag {
-      border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px;
-      font-size: 10px; color: #aaa; border-radius: 100px;
-      display: inline-block; margin-right: 6px; margin-top: 12px;
-    }
-
-    /* Special Modifiers */
-    .nature-glow {
-      position: absolute; bottom: 0; right: 0; width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%); pointer-events: none;
-    }
-    .redacted-bar {
-      display: inline-block; background: #333; color: transparent;
-      border-radius: 2px; padding: 0 4px; user-select: none;
+    .card:focus-visible{
+      outline: 2px solid rgba(212,175,55,0.7);
+      outline-offset: 4px;
     }
 
-    /* --- DOSSIER MODAL --- */
-    .dossier-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100;
-      opacity: 0; pointer-events: none; transition: 0.4s; backdrop-filter: blur(10px);
-      display: flex; align-items: center; justify-content: center; padding: 20px;
-    }
-    .dossier-overlay.active { opacity: 1; pointer-events: auto; }
-
-    .dossier {
-      background: #0a0a0a; border: 1px solid #333; width: 100%; max-width: 900px;
-      max-height: 90vh; overflow-y: auto; border-radius: 4px;
-      transform: translateY(30px); transition: 0.5s var(--ease);
-      display: grid; grid-template-columns: 300px 1fr;
-      box-shadow: 0 50px 100px rgba(0,0,0,0.8);
-    }
-    .dossier-overlay.active .dossier { transform: translateY(0); }
-    
-    @media (max-width: 750px) { .dossier { grid-template-columns: 1fr; } }
-
-    /* Dossier Left */
-    .d-left {
-      background: #0f0f0f; padding: 40px; border-right: 1px solid #222;
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .d-icon { font-size: 40px; margin-bottom: 20px; }
-    .stat-block { margin-top: 24px; }
-    .stat-label { font-family: 'Space Mono'; font-size: 10px; color: #555; text-transform: uppercase; }
-    .stat-val { font-size: 16px; color: white; font-weight: 500; font-family: 'Cinzel', serif; margin-top: 4px; }
-
-    /* Dossier Right */
-    .d-right { padding: 50px; position: relative; }
-    .close-btn {
-      position: absolute; top: 20px; right: 20px; background: none; border: none;
-      color: #444; cursor: pointer; font-size: 28px;
-    }
-    .close-btn:hover { color: white; }
-
-    .d-title { font-family: 'Cinzel', serif; font-size: 32px; margin: 0 0 10px; color: white; }
-    .d-tag { 
-      display: inline-block; padding: 4px 10px; background: rgba(255,255,255,0.05);
-      font-size: 10px; color: #999; text-transform: uppercase; margin-bottom: 24px; letter-spacing: 0.05em;
-    }
-    .d-body { font-size: 15px; line-height: 1.8; color: #bbb; margin-bottom: 40px; }
-    .d-body strong { color: white; font-weight: 600; }
-    .d-body ul { padding-left: 20px; margin: 0; }
-    .d-body li { margin-bottom: 10px; }
-
-    .d-cta {
-      display: inline-block; padding: 14px 28px; text-align: center;
-      background: white; color: black; text-decoration: none;
-      font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-      font-size: 11px; font-family: 'Space Mono'; transition: 0.2s;
-    }
-    .d-cta:hover { background: var(--accent-gold); }
-
-    /* --- FOOTER --- */
-    .footer {
-      margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--card-border);
-      display: flex; justify-content: space-between; align-items: center;
-      color: var(--text-muted); font-size: 12px; font-family: 'Space Mono';
+    /* Mouse Glow Effect */
+    .card-glow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        400px circle at var(--x, 50%) var(--y, 50%),
+        rgba(255,255,255,0.05),
+        transparent 50%
+      );
     }
 
+    .card-meta {
+      position: relative;
+      z-index: 2;
+      font-family: 'Space Mono';
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #555;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .badge {
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.05);
+      color: #888;
+      font-weight: 700;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .badge::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -100%;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      animation: badgeScan 3s linear infinite;
+    }
+    @keyframes badgeScan {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+
+    .card h2 {
+      position: relative;
+      z-index: 2;
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      margin: 20px 0 10px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    .card p {
+      position: relative;
+      z-index: 2;
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+      margin: 0;
+      max-width: 90%;
+      font-weight: 300;
+    }
+
+    .card-action {
+      position: relative;
+      z-index: 2;
+      margin-top: auto;
+      font-family: 'Space Mono';
+      font-size: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.4;
+      transition: 0.3s;
+    }
+    .card:hover .card-action { opacity: 1; transform: translateX(10px); }
+
+    /* TITLES WITH GRADIENTS + ANIMATIONS */
+    .title-nature { 
+      background: var(--grad-nature); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientFlow 8s ease infinite;
+    }
+    .title-tech { 
+      background: var(--grad-tech); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientFlow 6s ease infinite;
+    }
+    .title-rental { 
+      background: var(--grad-rental); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientFlow 7s ease infinite;
+    }
+    .title-stealth { 
+      background: var(--grad-stealth); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientFlow 9s ease infinite;
+    }
+    .title-pulse { 
+      background: var(--grad-pulse); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientFlow 5s ease infinite;
+    }
+    .title-hr { 
+      background: var(--grad-hr); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientFlow 10s ease infinite;
+    }
+
+    @keyframes gradientFlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .redacted { background: #333; color: transparent; border-radius: 2px; padding: 0 4px; user-select: none; }
+    .card:hover .redacted { background: var(--accent); opacity: 0.5; }
+
+    /* Special Card Effects */
+    .sanctuary-card::before { background: var(--grad-nature); }
+    .sanctuary-leaves {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.6s;
+      background-image: 
+        radial-gradient(2px 2px at 20% 30%, rgba(16,185,129,0.3), transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(16,185,129,0.2), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(16,185,129,0.4), transparent),
+        radial-gradient(2px 2px at 80% 10%, rgba(16,185,129,0.3), transparent);
+      background-size: 200% 200%;
+      animation: leafFloat 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .sanctuary-card:hover .sanctuary-leaves { opacity: 1; }
+    @keyframes leafFloat {
+      0%, 100% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+    }
+
+    .rental-card::before { background: var(--grad-rental); }
+    .rental-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.6s;
+      background-image: 
+        linear-gradient(rgba(251,191,36,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(251,191,36,0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+    .rental-card:hover .rental-grid { opacity: 1; }
+
+    .digitailor-card::before { background: var(--grad-hr); }
+    .digitailor-scan {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(248,250,252,0.8), transparent);
+      opacity: 0;
+      animation: scanLine 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .digitailor-card:hover .digitailor-scan { opacity: 1; }
+    @keyframes scanLine {
+      0% { top: 0%; }
+      50% { top: 100%; }
+      100% { top: 0%; }
+    }
+
+    .gulgul-card::before { background: var(--grad-tech); }
+    .gulgul-dots {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.6s;
+      background-image: 
+        radial-gradient(circle, rgba(59,130,246,0.4) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: dotPulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .gulgul-card:hover .gulgul-dots { opacity: 1; }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+
+    .edplus-card::before { background: var(--grad-tech); }
+    .edplus-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      opacity: 0;
+      transition: opacity 0.6s;
+      background: linear-gradient(180deg, transparent, rgba(59,130,246,0.1));
+      pointer-events: none;
+      z-index: 1;
+    }
+    .edplus-card:hover .edplus-wave { opacity: 1; }
+
+    .aura-card::before { background: var(--grad-stealth); }
+    .aura-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 300px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,85,247,0.3), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.6s;
+      animation: aurapulse 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .aura-card:hover .aura-glow { opacity: 1; }
+    @keyframes aurapulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.8); }
+      50% { transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    .pulse-card::before { background: var(--grad-pulse); }
+    .pulse-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.6s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .pulse-ring {
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(244,63,94,0.5);
+      border-radius: 50%;
+      animation: ringExpand 3s ease-out infinite;
+    }
+    .pulse-ring:nth-child(2) { animation-delay: 1s; }
+    .pulse-ring:nth-child(3) { animation-delay: 2s; }
+    .pulse-card:hover .pulse-rings { opacity: 1; }
+    @keyframes ringExpand {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    .labs-card::before { background: var(--grad-stealth); }
+    .labs-circuit {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.6s;
+      background-image: 
+        linear-gradient(90deg, transparent 49%, rgba(168,85,247,0.3) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(168,85,247,0.3) 50%, transparent 51%);
+      background-size: 100px 100px;
+      pointer-events: none;
+    }
+    .labs-card:hover .labs-circuit { opacity: 1; }
+
+    /* --- PORTAL SYSTEM --- */
+    .portal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: #000;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.6s var(--ease), visibility 0.6s;
+      display: flex;
+      flex-direction: column;
+    }
+    .portal.active { visibility: visible; opacity: 1; }
+
+    #portal-canvas { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+    .portal-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 60px 8vw;
+    }
+
+    .p-close {
+      position: fixed;
+      top: 40px;
+      right: 40px;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      z-index: 10;
+      font-family: 'Space Mono';
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+    .p-close:hover { background: #fff; color: #000; }
+    .p-close:focus-visible{
+      outline: 2px solid rgba(212,175,55,0.7);
+      outline-offset: 4px;
+    }
+
+    .p-tag { font-family: 'Space Mono'; font-size: 12px; color: var(--accent); margin-bottom: 20px; display: block; letter-spacing: 2px; }
+    .p-title { font-family: 'Cinzel', serif; font-size: clamp(40px, 10vw, 120px); line-height: 0.9; margin: 0 0 30px; }
+
+    .p-desc { font-size: clamp(16px, 1.8vw, 24px); line-height: 1.6; color: #ccc; font-weight: 200; max-width: 800px; }
+    .p-desc strong { color: #fff; font-weight: 700; }
+
+    .p-btn {
+      display: inline-block;
+      margin-top: 50px;
+      padding: 22px 50px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      font-weight: 800;
+      font-family: 'Space Mono';
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+    .p-btn:hover { background: var(--accent); transform: translateY(-5px); }
+    .p-btn:focus-visible{
+      outline: 2px solid rgba(212,175,55,0.7);
+      outline-offset: 4px;
+    }
+
+    /* Portal Atmospheres */
+    .p-atmosphere { position: absolute; inset: 0; z-index: 0; opacity: 0.5; transition: 1s; }
+    .theme-nature .p-atmosphere  { background: radial-gradient(circle at 50% 100%, #064e3b, transparent 80%); }
+    .theme-tech .p-atmosphere    { background: radial-gradient(circle at 50% 100%, #0c4a6e, transparent 80%); }
+    .theme-stealth .p-atmosphere { background: radial-gradient(circle at 50% 100%, #2e1065, transparent 80%); }
+    .theme-pulse .p-atmosphere   { background: radial-gradient(circle at 50% 100%, #4c0519, transparent 80%); }
+    .theme-rental .p-atmosphere  { background: radial-gradient(circle at 50% 100%, #78350f, transparent 80%); }
+    .theme-hr .p-atmosphere      { background: radial-gradient(circle at 50% 100%, #94a3b8, transparent 80%); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .card, .view-main, .portal { transition: none !important; }
+      .card:hover { transform: none; }
+      .p-btn:hover { transform: none; }
+      .sanctuary-leaves, .gulgul-dots, .digitailor-scan, .pulse-rings,
+      .title-nature, .title-tech, .title-rental, .title-stealth, 
+      .title-pulse, .title-hr, .badge::after { animation: none !important; }
+    }
   </style>
 </head>
-<body>
 
-  <div class="ambient-light"></div>
+<body>
   <div class="noise"></div>
 
-  <div class="container">
-    
-    <header class="header">
-      
-      <!-- LOGO ADDED HERE -->
-      <div class="logo-container">
-        <img src="assets/logo.png" alt="RANG & MALL PRIVATE LIMITED logo" class="logo-img">
+  <main class="view-main">
+    <header>
+      <div class="logo-wrap">
+        <svg class="logo-img" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+          <text x="100" y="60" font-family="Cinzel, serif" font-size="48" font-weight="700" fill="#d4af37" text-anchor="middle">R&M</text>
+        </svg>
       </div>
-
       <h1>RANG & MALL</h1>
-      <div class="subtitle">Private Limited • Est. 2024</div>
+      <div class="tagline">Global Venture Operations</div>
     </header>
 
-    <div class="grid">
-
-      <!-- 1. NATURE VILLAS (The Crown Jewel - 8 cols) -->
-      <div class="card col-8" style="background: linear-gradient(160deg, rgba(6, 78, 59, 0.15), rgba(0,0,0,0)); border-color: rgba(6, 78, 59, 0.3);" onclick="openDossier('nature')">
-        <div class="nature-glow"></div>
-        <div class="eyebrow">
-          <span>Real Estate</span>
-          <span style="color:var(--accent-nature)">● PLANNING</span>
+    <div class="grid" id="main-grid">
+      <!-- 1. THE SANCTUARY -->
+      <div class="card col-8 sanctuary-card" role="button" tabindex="0" data-portal="nature">
+        <div class="card-glow"></div>
+        <div class="sanctuary-leaves"></div>
+        <div class="card-meta">REAL ESTATE <span class="badge">PLANNING</span></div>
+        <div>
+          <h2 class="title-nature">The Sanctuary</h2>
+          <p>Mesmerizing villa communities where architecture lives in harmony with nature. Sustainable luxury for the global citizen.</p>
         </div>
-        <h3 style="font-family:'Cinzel', serif; font-size: 32px;">The Sanctuary</h3>
-        <p style="font-size:16px;">Developing 100% sustainable, nature-integrated villa communities. Biophilic luxury on the city outskirts.</p>
-        <div style="margin-top:auto">
-          <span class="asset-tag">ECO-DEVELOPMENT</span>
-          <span class="asset-tag">LUXURY ASSET</span>
-          <div class="expand-hint">View Masterplan →</div>
-        </div>
+        <div class="card-action">Enter Living Environment →</div>
       </div>
 
-      <!-- 2. GULGUL (4 cols) -->
-      <div class="card col-4" onclick="openDossier('gulgul')">
-        <div class="eyebrow">
-          <span>Logistics</span>
-          <span style="color:var(--accent-tech)">● BETA</span>
+      <!-- 2. RENTAL COMMUNITIES -->
+      <div class="card col-4 rental-card" role="button" tabindex="0" data-portal="rental">
+        <div class="card-glow"></div>
+        <div class="rental-grid"></div>
+        <div class="card-meta">FINTECH <span class="badge">REVENUE</span></div>
+        <div>
+          <h2 class="title-rental">Rental Communities</h2>
+          <p>The global financial ledger for property management and cross-border payments.</p>
         </div>
-        <h3>Gulgul</h3>
-        <p>AI-driven logistics infrastructure. Optimizing density and speed.</p>
-        <div style="margin-top:auto">
-          <span class="asset-tag">SUPPLY CHAIN AI</span>
-          <div class="expand-hint">View Tech Stack →</div>
-        </div>
+        <div class="card-action">View Financials →</div>
       </div>
 
-      <!-- ROW 2: Cash & Growth -->
-      <!-- 3. RENTAL (4 cols) -->
-      <div class="card col-4" onclick="openDossier('rental')">
-        <div class="eyebrow">
-          <span>FinTech</span>
-          <span style="color:var(--accent-nature)">● REVENUE</span>
+      <!-- 3. DIGITAILOR -->
+      <div class="card col-4 digitailor-card" role="button" tabindex="0" data-portal="digitailor">
+        <div class="card-glow"></div>
+        <div class="digitailor-scan"></div>
+        <div class="card-meta">HR TECH <span class="badge">GROWTH</span></div>
+        <div>
+          <h2 class="title-hr">Digitailor</h2>
+          <p>AI-powered career optimization. Reconstructing identities to bypass global ATS filters.</p>
         </div>
-        <h3>Rental Communities</h3>
-        <p>Tenant management and payment rails. Digitizing the landlord experience.</p>
-        <div class="expand-hint">View Financials →</div>
+        <div class="card-action">Deploy AI →</div>
       </div>
 
-      <!-- 4. DIGITAILOR (4 cols) -->
-      <div class="card col-4" onclick="openDossier('digitailor')">
-        <div class="eyebrow">
-          <span>HR Tech</span>
-          <span style="color:var(--accent-cyan)">● GROWTH</span>
+      <!-- 4. GULGUL -->
+      <div class="card col-4 gulgul-card" role="button" tabindex="0" data-portal="gulgul">
+        <div class="card-glow"></div>
+        <div class="gulgul-dots"></div>
+        <div class="card-meta">LOGISTICS <span class="badge">BETA</span></div>
+        <div>
+          <h2 class="title-tech">Gulgul</h2>
+          <p>AI density engine optimizing last-mile delivery infrastructure.</p>
         </div>
-        <h3>Digitailor</h3>
-        <p>AI-powered resume tailoring. Bypassing ATS filters with LLM precision.</p>
-        <div class="expand-hint">View Platform →</div>
+        <div class="card-action">Initialize →</div>
       </div>
 
-      <!-- 5. EDPLUS (4 cols) -->
-      <div class="card col-4" onclick="openDossier('edplus')">
-        <div class="eyebrow">
-          <span>EdTech</span>
-          <span style="color:var(--accent-purple)">● BUILDING</span>
+      <!-- 5. EDPLUS -->
+      <div class="card col-4 edplus-card" role="button" tabindex="0" data-portal="edplus">
+        <div class="card-glow"></div>
+        <div class="edplus-wave"></div>
+        <div class="card-meta">EDTECH <span class="badge">BUILDING</span></div>
+        <div>
+          <h2 class="title-tech">EdPlus</h2>
+          <p>Adaptive learning platforms for the post-mobile workforce.</p>
         </div>
-        <h3>EdPlus</h3>
-        <p>Adaptive learning engines bridging the gap between curriculum and career.</p>
-        <div class="expand-hint">View Prototype →</div>
+        <div class="card-action">Open Syllabus →</div>
       </div>
 
-      <!-- ROW 3: The Future -->
-      <!-- 6. COSMETICS (4 cols) -->
-      <div class="card col-4" onclick="openDossier('lipstick')">
-        <div class="eyebrow">
-          <span>Consumer Hardware</span>
-          <span style="color:#444">● STEALTH</span>
+      <!-- 6. PROJECT AURA -->
+      <div class="card col-4 aura-card" role="button" tabindex="0" data-portal="aura">
+        <div class="card-glow"></div>
+        <div class="aura-glow"></div>
+        <div class="card-meta">HARDWARE <span class="badge">STEALTH</span></div>
+        <div>
+          <h2 class="title-stealth">Project Aura</h2>
+          <p>Next-gen consumer application <span class="redacted">xxxxxx</span> mechanism. Redefining precision.</p>
         </div>
-        <h3 style="color:#aaa">Project Aura</h3>
-        <p>Patent-pending <span class="redacted-bar">roller</span> application mechanism.</p>
-        <div class="expand-hint">View IP Status →</div>
+        <div class="card-action">Decrypt IP →</div>
       </div>
 
-      <!-- 7. SOCIAL (4 cols) -->
-      <div class="card col-4" onclick="openDossier('social')">
-        <div class="eyebrow">
-          <span>Social Graph</span>
-          <span style="color:#444">● STEALTH</span>
+      <!-- 7. PROJECT PULSE -->
+      <div class="card col-4 pulse-card" role="button" tabindex="0" data-portal="pulse">
+        <div class="card-glow"></div>
+        <div class="pulse-rings">
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
         </div>
-        <h3 style="color:#aaa">Project Pulse</h3>
-        <p>Next-gen matchmaking via <span class="redacted-bar">psychographics</span>.</p>
-        <div class="expand-hint">Access Data →</div>
+        <div class="card-meta">SOCIAL <span class="badge">STEALTH</span></div>
+        <div>
+          <h2 class="title-pulse">Project Pulse</h2>
+          <p>Global connection engine matched via psychographic synchronization.</p>
+        </div>
+        <div class="card-action">Connect →</div>
       </div>
 
-      <!-- 8. LABS (4 cols - AGRI & OS) -->
-      <div class="card col-4" onclick="openDossier('labs')">
-        <div class="eyebrow"><span>R&D PIPELINE</span></div>
-        <h3>Future Labs</h3>
-        <p>Incubating Moonshots in Agri-Tech and Core Operating Systems.</p>
-        <div style="margin-top:10px;">
-           <span class="asset-tag">AGRI</span>
-           <span class="asset-tag">OS</span>
-           <div class="expand-hint">View Pipeline →</div>
+      <!-- 8. FUTURE LABS -->
+      <div class="card col-4 labs-card" role="button" tabindex="0" data-portal="labs">
+        <div class="card-glow"></div>
+        <div class="labs-circuit"></div>
+        <div class="card-meta">R&amp;D <span class="badge">LABS</span></div>
+        <div>
+          <h2 class="title-stealth">Labs &amp; OS</h2>
+          <p>Incubating Moonshots in Agri-Tech and Core Operating Systems.</p>
         </div>
+        <div class="card-action">Execute →</div>
       </div>
-
     </div>
 
-    <footer class="footer">
-      <div>VISAKHAPATNAM, INDIA</div>
-      <div>© <span id="y"></span> R&M PVT LTD</div>
+    <footer style="margin-top: 100px; text-align: center; font-family: 'Space Mono'; font-size: 11px; color: #444; letter-spacing: 2px;">
+      GLOBAL VENTURE OPERATIONS • © <span id="year"></span> • ALL RIGHTS RESERVED
     </footer>
+  </main>
 
-  </div>
+  <!-- IMMERSIVE PORTAL -->
+  <div id="portal" class="portal" aria-hidden="true">
+    <canvas id="portal-canvas"></canvas>
+    <div class="p-atmosphere"></div>
+    <button class="p-close" id="p-close" type="button">✕ DISCONNECT</button>
 
-  <!-- DOSSIER MODAL -->
-  <div class="dossier-overlay" id="overlay" onclick="closeDossier(event)">
-    <div class="dossier" onclick="event.stopPropagation()">
-      
-      <!-- Left side -->
-      <div class="d-left">
-        <div>
-          <div class="d-icon" id="d-icon"></div>
-        </div>
-        <div>
-          <div class="stat-block">
-            <div class="stat-label">Asset Class</div>
-            <div class="stat-val" id="d-vertical"></div>
-          </div>
-          <div class="stat-block">
-            <div class="stat-label">Status</div>
-            <div class="stat-val" id="d-status"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right side -->
-      <div class="d-right">
-        <button class="close-btn" onclick="closeDossier()">×</button>
-        <div class="d-tag" id="d-tag"></div>
-        <h2 class="d-title" id="d-title"></h2>
-        <div class="d-body" id="d-body"></div>
-        <a href="#" class="d-cta" id="d-cta"></a>
-      </div>
-
+    <div class="portal-content" role="dialog" aria-modal="true" aria-labelledby="p-title" aria-describedby="p-desc">
+      <span class="p-tag" id="p-tag"></span>
+      <h1 class="p-title" id="p-title"></h1>
+      <div class="p-desc" id="p-desc"></div>
+      <div><a href="#" class="p-btn" id="p-btn">Initiate Partnership</a></div>
     </div>
   </div>
 
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    // ========= BASIC =========
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // --- CONTENT DATABASE ---
-    const data = {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ========= MOUSE GLOW (PERF-SAFE) =========
+    const grid = document.getElementById('main-grid');
+    let raf = null;
+    let lastEvent = null;
+
+    grid.addEventListener('mousemove', (e) => {
+      lastEvent = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const card = lastEvent.target.closest('.card');
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--x', `${lastEvent.clientX - rect.left}px`);
+        card.style.setProperty('--y', `${lastEvent.clientY - rect.top}px`);
+      });
+    });
+
+    // ========= PORTAL DATA =========
+    const portalData = {
       nature: {
-        icon: "🌿",
-        vertical: "Real Estate",
-        status: "Planning",
-        tag: "ECO-DEVELOPMENT",
         title: "The Sanctuary",
-        body: "<strong>The Vision:</strong> High-net-worth individuals are fleeing urban congestion. We are developing gated, nature-based villa communities on the city outskirts.<br><br><strong>The Product:</strong> 'The Sanctuary' preserves 70% of local flora, integrating sustainable luxury homes directly into the landscape.<br><br><strong>Asset Class:</strong> High-appreciation land banking with development upside.",
-        cta: "Inquire about Land",
-        link: "mailto:founders@rangandmall.com?subject=The Sanctuary Inquiry"
-      },
-      gulgul: {
-        icon: "📦",
-        vertical: "Logistics",
-        status: "Beta Active",
-        tag: "SUPPLY CHAIN AI",
-        title: "Gulgul Logistics",
-        body: "<strong>The Innovation:</strong> Traditional logistics optimize for speed. We optimize for <em>density</em>.<br><br><strong>The Tech:</strong> Gulgul uses proprietary AI to bundle deliveries in hyper-local clusters, reducing fuel costs and increasing drops-per-hour by 40%.",
-        cta: "Partner with Gulgul",
-        link: "mailto:founders@rangandmall.com?subject=Gulgul Partnership"
+        tag: "PASSPORT TO NATURE",
+        desc: "<strong>Feel the Life Inside.</strong> A mesmerizing architectural ecosystem where gravity-fed waterfalls flow beside luxury villas. Wake up to the chirping of small swallows and the mist of the forest. Sustainable, gated, and completely integrated into the wild.",
+        theme: "theme-nature",
+        type: "nature"
       },
       rental: {
-        icon: "💳",
-        vertical: "FinTech",
-        status: "Revenue",
-        tag: "FINANCIAL INFRASTRUCTURE",
         title: "Rental Communities",
-        body: "<strong>The Engine:</strong> We built the payment rail for the modern landlord. Automating lease agreements, rent collection, and maintenance requests in one dashboard.<br><br><strong>Traction:</strong> Processing recurring monthly volume. High retention, low churn.",
-        cta: "View Financials (NDA)",
-        link: "mailto:founders@rangandmall.com?subject=Rental Communities Financials"
+        tag: "GLOBAL LEDGER",
+        desc: "A high-end financial environment for US and Global real estate. Automating the lifecycle of tenant management through a secure, banking-grade interface.",
+        theme: "theme-rental",
+        type: "data"
       },
       digitailor: {
-        icon: "🎯",
-        vertical: "HR Tech",
-        status: "Growth",
-        tag: "B2C SAAS",
         title: "Digitailor",
-        body: "<strong>The Problem:</strong> 75% of resumes are rejected by ATS filters.<br><br><strong>The Solution:</strong> Digitailor is an AI agent that rewrites a user's resume keyword-by-keyword to match job descriptions. Increases interview conversion by 3x.",
-        cta: "Request Demo",
-        link: "mailto:founders@rangandmall.com?subject=Digitailor Demo"
+        tag: "AI CAREER AGENT",
+        desc: "The precision of a master tailor applied to professional identity. Our AI agents reconstruct resumes in real-time to ensure absolute compatibility with top-tier hiring algorithms.",
+        theme: "theme-hr",
+        type: "scan"
+      },
+      gulgul: {
+        title: "Gulgul Logistics",
+        tag: "DENSITY AI",
+        desc: "Redefining the movement of atoms. Gulgul uses proprietary AI to bundle last-mile deliveries based on density clusters, reducing carbon and fuel waste by 40%.",
+        theme: "theme-tech",
+        type: "dots"
       },
       edplus: {
-        icon: "🎓",
-        vertical: "EdTech",
-        status: "Development",
-        tag: "LEARNING PLATFORM",
         title: "EdPlus",
-        body: "<strong>The Mission:</strong> The gap between academic curriculum and industry requirements is widening.<br><br><strong>The Solution:</strong> EdPlus is an adaptive learning engine that modifies course content in real-time based on the student's pace and industry trends.<br><br><strong>Target:</strong> Enterprise upskilling and higher education institutions.",
-        cta: "Discuss Partnership",
-        link: "mailto:founders@rangandmall.com?subject=EdPlus Partnership"
+        tag: "ADAPTIVE LEARNING",
+        desc: "Bridging the gap between curriculum and industry. EdPlus is an adaptive learning engine that modifies course content in real-time based on learner mastery.",
+        theme: "theme-tech",
+        type: "data"
       },
-      lipstick: {
-        icon: "💄",
-        vertical: "Hardware",
-        status: "Patent Pending",
-        tag: "CONFIDENTIAL IP",
+      aura: {
         title: "Project Aura",
-        body: "<strong>The Innovation:</strong> A new 'Roller' mechanism for cosmetics that prevents breakage and allows precise application.<br><br><strong>Status:</strong> Prototype complete. Patent filing in process.",
-        cta: "Contact for Licensing",
-        link: "mailto:founders@rangandmall.com?subject=Project Aura Licensing"
+        tag: "CLASSIFIED R&D",
+        desc: "A next-generation solid-state application protocol for cosmetics. Zero-waste precision. The mechanism remains <span class='redacted'>[REDACTED]</span> until partnership vetting.",
+        theme: "theme-stealth",
+        type: "mist"
       },
-      social: {
-        icon: "🧬",
-        vertical: "Social",
-        status: "Alpha",
-        tag: "ALGORITHM",
+      pulse: {
         title: "Project Pulse",
-        body: "<strong>The Shift:</strong> Moving beyond the swipe.<br><br><strong>The Protocol:</strong> Pulse is a connection engine based on deep psychographics and value alignment. Designed for high-retention social graphing.",
-        cta: "Join Waitlist",
-        link: "mailto:founders@rangandmall.com?subject=Pulse Waitlist"
+        tag: "SOCIAL GRAPH",
+        desc: "Human connection beyond the superficial. Pulse matches the global population through deep psychographic and value alignment.",
+        theme: "theme-pulse",
+        type: "pulse"
       },
       labs: {
-        icon: "🔬",
-        vertical: "R&D",
-        status: "Planning",
-        tag: "FUTURE TECH",
-        title: "Future Horizons",
-        body: "<strong>Project Harvest (Agri-Tech):</strong><br>Developing sensor networks for sustainable yield optimization in micro-climates.<br><br><strong>Core OS:</strong><br>Reimagining endpoint management and the human-computer interface for the post-mobile era.",
-        cta: "Discuss R&D",
-        link: "mailto:founders@rangandmall.com?subject=R&D Inquiry"
+        title: "Future Labs",
+        tag: "MOONSHOTS",
+        desc: "<strong>Project Harvest:</strong> Agri-tech sensor networks.<br><strong>Core OS:</strong> The next operating system paradigm for the post-mobile hardware era.",
+        theme: "theme-stealth",
+        type: "dots"
       }
     };
 
-    const overlay = document.getElementById('overlay');
-    const els = {
-      icon: document.getElementById('d-icon'),
-      vert: document.getElementById('d-vertical'),
-      stat: document.getElementById('d-status'),
-      tag: document.getElementById('d-tag'),
-      title: document.getElementById('d-title'),
-      body: document.getElementById('d-body'),
-      cta: document.getElementById('d-cta')
-    };
+    // ========= CANVAS PARTICLES =========
+    const canvas = document.getElementById('portal-canvas');
+    const ctx = canvas.getContext('2d', { alpha: true });
 
-    function openDossier(key) {
-      const content = data[key];
-      if(!content) return;
-      els.icon.textContent = content.icon;
-      els.vert.textContent = content.vertical;
-      els.stat.textContent = content.status;
-      els.tag.textContent = content.tag;
-      els.title.textContent = content.title;
-      els.body.innerHTML = content.body;
-      els.cta.textContent = content.cta;
-      els.cta.href = content.link;
-      overlay.classList.add('active');
+    let particles = [];
+    let animationId = null;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor(type) {
+        this.type = type;
+        this.init();
+      }
+      init() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 1;
+        this.speedY = (Math.random() - 0.5) * 1;
+        this.alpha = Math.random() * 0.5;
+
+        if (this.type === "nature") {
+          this.x = (Math.random() * 80) + (canvas.width * 0.1);
+          this.y = -20;
+          this.speedY = Math.random() * 15 + 10;
+          this.speedX = (Math.random() - 0.5) * 2;
+        }
+
+        if (this.type === "birds") {
+          this.x = -50;
+          this.y = Math.random() * (canvas.height * 0.4);
+          this.speedX = Math.random() * 2 + 2;
+          this.speedY = Math.sin(this.x * 0.01) * 1;
+          this.size = 2;
+        }
+
+        if (this.type === "scan") {
+          this.y = -50;
+          this.speedY = 12;
+          this.speedX = 0;
+          this.size = 1;
+          this.alpha = 0.22;
+        }
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (
+          this.y > canvas.height + 50 ||
+          this.x > canvas.width + 50 ||
+          this.x < -100 ||
+          this.y < -100
+        ) {
+          this.init();
+        }
+      }
+
+      draw() {
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+
+        if (this.type === "birds") {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+          return;
+        }
+
+        if (this.type === "scan") {
+          ctx.fillRect(0, this.y, canvas.width, 1);
+          return;
+        }
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
-    function closeDossier(e) {
-      if (e && e.target !== overlay && e.target.className !== 'close-btn') return;
-      overlay.classList.remove('active');
+    function animate() {
+      if (reducedMotion) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const p of particles) {
+        p.update();
+        p.draw();
+      }
+
+      animationId = requestAnimationFrame(animate);
     }
+
+    function stopAnimation() {
+      if (animationId) cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+
+    // ========= PORTAL OPEN/CLOSE + ACCESSIBILITY =========
+    const portal = document.getElementById('portal');
+    const closeBtn = document.getElementById('p-close');
+
+    let lastFocusedEl = null;
+
+    function focusTrap(e) {
+      if (!portal.classList.contains('active')) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        exitPortal();
+        return;
+      }
+
+      if (e.key !== 'Tab') return;
+
+      const focusables = portal.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+      const list = Array.from(focusables).filter(el => !el.hasAttribute('disabled'));
+      if (list.length === 0) return;
+
+      const first = list[0];
+      const last = list[list.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', focusTrap);
+
+    function syncUrl(key) {
+      const url = new URL(window.location);
+      if (key) url.searchParams.set('venture', key);
+      else url.searchParams.delete('venture');
+      history.replaceState({}, '', url);
+    }
+
+    function enterPortal(key) {
+      const data = portalData[key];
+      if (!data) return;
+
+      lastFocusedEl = document.activeElement;
+
+      portal.className = 'portal active ' + data.theme;
+      portal.setAttribute('aria-hidden', 'false');
+
+      document.getElementById('p-tag').textContent = data.tag;
+      document.getElementById('p-title').textContent = data.title;
+      document.getElementById('p-desc').innerHTML = data.desc;
+
+      document.getElementById('p-btn').href = `mailto:founders@rangandmall.com?subject=Inquiry: ${encodeURIComponent(data.title)}`;
+
+      particles = [];
+      if (!reducedMotion) {
+        if (data.type === 'nature') {
+          for (let i = 0; i < 150; i++) particles.push(new Particle('nature'));
+          for (let i = 0; i < 8; i++) particles.push(new Particle('birds'));
+        } else if (data.type === 'scan') {
+          particles.push(new Particle('scan'));
+        } else {
+          for (let i = 0; i < 100; i++) particles.push(new Particle('dots'));
+        }
+        stopAnimation();
+        animate();
+      }
+
+      document.body.classList.add('portal-active');
+      syncUrl(key);
+
+      closeBtn.focus();
+    }
+
+    function exitPortal() {
+      portal.className = 'portal';
+      portal.classList.remove('active');
+      portal.setAttribute('aria-hidden', 'true');
+
+      document.body.classList.remove('portal-active');
+      stopAnimation();
+
+      syncUrl(null);
+
+      if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+        lastFocusedEl.focus();
+      }
+    }
+
+    closeBtn.addEventListener('click', exitPortal);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAnimation();
+      else if (portal.classList.contains('active')) animate();
+    });
+
+    document.querySelectorAll('.card[data-portal]').forEach(card => {
+      card.addEventListener('click', () => enterPortal(card.dataset.portal));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          enterPortal(card.dataset.portal);
+        }
+      });
+    });
+
+    const initial = new URL(window.location).searchParams.get('venture');
+    if (initial) enterPortal(initial);
   </script>
 </body>
 </html>
