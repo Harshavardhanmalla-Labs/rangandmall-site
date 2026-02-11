@@ -1,10 +1,9 @@
+import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/navigation/Header";
-import Footer from "@/components/navigation/Footer";
 
-export const metadata = {
-  title: "FreedomLabs Ecosystem",
-  description: "Unified digital ecosystem by FreedomLabs",
+export const metadata: Metadata = {
+  title: "Rang & Mall",
+  description: "Rang & Mall is a collection of companies.",
 };
 
 export default function RootLayout({
@@ -14,11 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-white text-gray-900 antialiased">
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

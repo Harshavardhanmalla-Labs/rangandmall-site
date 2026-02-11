@@ -1,3 +1,13 @@
-export default function Container({ children }: { children: React.ReactNode }) {
-  return <div className="max-w-7xl mx-auto px-6">{children}</div>;
+interface ContainerProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function Container({
+  children,
+  className = "",
+}: ContainerProps) {
+  return (
+    <div className={`container-custom ${className}`.trim()}>{children}</div>
+  );
 }
