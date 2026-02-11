@@ -1,7 +1,13 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/governance/page": "app/governance/page.js",
   "/careers/page": "app/careers/page.js",
+  "/dwell/page": "app/dwell/page.js",
+  "/freedomlabs/page": "app/freedomlabs/page.js",
+  "/governance/page": "app/governance/page.js",
   "/page": "app/page.js",
-  "/ventures/page": "app/ventures/page.js"
+  "/ventures/page": "app/ventures/page.js",
+  "/workspace/chat/page": "app/workspace/chat/page.js",
+  "/workspace/docs/page": "app/workspace/docs/page.js",
+  "/workspace/page": "app/workspace/page.js",
+  "/workspace/projects/page": "app/workspace/projects/page.js"
 }

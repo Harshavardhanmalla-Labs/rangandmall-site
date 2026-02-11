@@ -1,11 +1,4 @@
-import "../styles/globals.css";
-import Header from "@/components/Header";
 import AppLauncher from "@/components/AppLauncher";
-
-export const metadata = {
-  title: "Rang & Mall",
-  description: "Global Venture Studio & Product Holding Company",
-};
 
 export default function RootLayout({
   children,
@@ -14,9 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Header />
-        {children}
+      <body className="bg-[#0A0D14] text-[#E8EBF2]">
         <AppLauncher />
         {children}
       </body>
